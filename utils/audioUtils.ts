@@ -15,7 +15,13 @@ export async function decodeAudioData(
   sampleRate: number,
   numChannels: number,
 ): Promise<AudioBuffer> {
-  const dataInt16 = new Int16Array(data.buffer);
+  // Use byteOffset and byteLength for safer TypedArray creation from potentially larger buffers
+  const dataInt16 = new Int16Array(
+    data.buffer, 
+    data.byteOffset, 
+    data.byteLength / 2
+  );
+  
   const frameCount = dataInt16.length / numChannels;
   const buffer = ctx.createBuffer(numChannels, frameCount, sampleRate);
 
@@ -36,6 +42,7 @@ export async function playRawAudio(base64Data: string) {
       activeAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
     }
     
+    // Resume context if it was suspended due to autoplay policies
     if (activeAudioContext.state === 'suspended') {
       await activeAudioContext.resume();
     }
