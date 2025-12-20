@@ -141,7 +141,7 @@ const LessonSession: React.FC<Props> = ({ state, lesson, onComplete, onExit }) =
   const panelBorder = isDark ? 'border-[#2A2A2A]' : 'border-[#C2B280]/30';
 
   return (
-    <div className={`fixed inset-0 ${bgColor} ${textColor} z-50 flex flex-col transition-colors ${isRTL ? 'rtl-layout' : 'ltr-layout'}`}>
+    <div className={`fixed inset-0 ${bgColor} ${textColor} z-50 flex flex-col transition-colors ${isRTL ? 'rtl-layout' : 'ltr-layout'}`} style={{ height: '100dvh' }}>
       <div className="p-4 max-w-xl mx-auto w-full flex items-center gap-4">
         <button onClick={onExit} className="text-gray-500 hover:text-[#A65E44] transition-colors p-2">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -154,7 +154,7 @@ const LessonSession: React.FC<Props> = ({ state, lesson, onComplete, onExit }) =
         </div>
       </div>
 
-      <main className="flex-1 flex flex-col items-center justify-center p-6 max-w-xl mx-auto w-full relative">
+      <main className="flex-1 flex flex-col items-center justify-center p-6 max-w-xl mx-auto w-full relative overflow-y-auto">
         {phase === 'teaching' ? (
           <div className="w-full space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 z-10">
             <div className="space-y-4 text-center">
@@ -163,16 +163,16 @@ const LessonSession: React.FC<Props> = ({ state, lesson, onComplete, onExit }) =
               </div>
               
               <div className="flex flex-col items-center gap-3">
-                <div className="text-7xl font-black text-[#F5F5F5] leading-none mb-4">{getTarget()}</div>
+                <div className="text-6xl md:text-7xl font-black text-[#F5F5F5] leading-none mb-4">{getTarget()}</div>
               </div>
 
-              <div className="text-xl text-[#C2B280] font-bold uppercase italic opacity-60">
+              <div className="text-lg md:text-xl text-[#C2B280] font-bold uppercase italic opacity-60">
                 {getSource()}
               </div>
             </div>
             
             <div className="space-y-4">
-              <div className={`${panelColor} p-8 rounded-[32px] border-b-4 border-black/20 relative shadow-xl overflow-hidden group`}>
+              <div className={`${panelColor} p-6 md:p-8 rounded-[32px] border-b-4 border-black/20 relative shadow-xl overflow-hidden group`}>
                 <div className="absolute top-0 left-0 w-1.5 h-full bg-[#A65E44]"></div>
                 <div className="flex justify-between items-start mb-3">
                    <div className="text-[9px] font-black text-[#C2B280] tracking-widest uppercase">{t.tabletUsage}</div>
@@ -181,7 +181,7 @@ const LessonSession: React.FC<Props> = ({ state, lesson, onComplete, onExit }) =
                 <div className="text-xs text-gray-400 font-bold italic opacity-70">{getExampleTranslation()}</div>
               </div>
 
-              <div className={`p-6 bg-[#A65E44]/5 border-2 border-[#A65E44]/30 rounded-[32px] relative flex flex-col items-center justify-center text-center`}>
+              <div className={`p-5 md:p-6 bg-[#A65E44]/5 border-2 border-[#A65E44]/30 rounded-[32px] relative flex flex-col items-center justify-center text-center`}>
                 <div className="text-[10px] font-black text-[#C2B280] uppercase tracking-widest mb-3 opacity-60">
                   {t.wisdom}
                 </div>
@@ -195,18 +195,18 @@ const LessonSession: React.FC<Props> = ({ state, lesson, onComplete, onExit }) =
           <div className="w-full space-y-10 animate-in fade-in zoom-in-95 duration-500 z-10">
             <div className="text-center space-y-4">
               <h2 className="text-[10px] font-black text-gray-500 tracking-widest uppercase">{t.alignMeaning}</h2>
-              <div className={`text-4xl font-black py-8 px-10 ${panelColor} border-b-4 border-black/30 rounded-[32px] inline-block text-[#A65E44] shadow-xl relative`}>
+              <div className={`text-3xl md:text-4xl font-black py-6 md:py-8 px-8 md:px-10 ${panelColor} border-b-4 border-black/30 rounded-[32px] inline-block text-[#A65E44] shadow-xl relative`}>
                 {getSource()}
               </div>
             </div>
 
-            <div className="grid gap-4">
+            <div className="grid gap-3 md:gap-4">
               {options.map((opt, i) => (
                 <button
                   key={opt}
                   disabled={result !== null}
                   onClick={() => setSelected(opt)}
-                  className={`clay-tablet p-6 text-left rounded-[24px] text-lg font-black transition-all ${
+                  className={`clay-tablet p-5 md:p-6 text-left rounded-[24px] text-base md:text-lg font-black transition-all ${
                     selected === opt 
                       ? (result === 'correct' ? 'bg-[#A65E44] border-[#8D503A] text-white shadow-xl' : 
                          result === 'wrong' ? 'bg-[#5A3127] border-red-900 text-white' : 
@@ -224,9 +224,9 @@ const LessonSession: React.FC<Props> = ({ state, lesson, onComplete, onExit }) =
         )}
       </main>
 
-      <footer className={`p-8 border-t-2 ${panelBorder} transition-all duration-300 ${result === 'correct' ? 'bg-[#A65E44]/15' : result === 'wrong' ? 'bg-[#5A3127]/20' : bgColor}`}>
-        <div className="max-w-xl mx-auto flex flex-col items-center gap-6">
-          <div className="w-full text-center">
+      <footer className={`p-6 pb-12 md:pb-8 border-t-2 ${panelBorder} transition-all duration-300 ${result === 'correct' ? 'bg-[#A65E44]/15' : result === 'wrong' ? 'bg-[#5A3127]/20' : bgColor} z-50`}>
+        <div className="max-w-xl mx-auto flex flex-col items-center gap-4 md:gap-6">
+          <div className="w-full text-center h-12 flex items-center justify-center">
              {result === 'wrong' && (
                <div className="animate-in slide-in-from-bottom-2">
                  <div className="text-[10px] font-black text-red-500 tracking-widest uppercase mb-1">{t.misaligned}</div>
@@ -250,10 +250,10 @@ const LessonSession: React.FC<Props> = ({ state, lesson, onComplete, onExit }) =
           <button
             onClick={result !== null || phase === 'teaching' ? handleNext : handleCheck}
             disabled={phase === 'quiz' && !selected}
-            className={`clay-tablet w-full py-6 rounded-2xl text-sm font-black tracking-widest uppercase shadow-xl ${
+            className={`clay-tablet w-full py-5 md:py-6 rounded-2xl text-xs md:text-sm font-black tracking-widest uppercase shadow-xl ${
               result === 'correct' ? 'bg-[#C2B280] border-[#A99C70] text-black' :
               result === 'wrong' ? 'bg-red-700 border-red-900 text-white' :
-              (phase === 'teaching' || selected) ? 'bg-[#A65E44] border-[#8D503A] text-white' : `${panelColor} ${panelBorder} text-gray-600 grayscale`
+              (phase === 'teaching' || selected) ? 'bg-[#A65E44] border-[#8D503A] text-white' : `${panelColor} ${panelBorder} text-gray-600 grayscale opacity-50`
             }`}
           >
             {phase === 'teaching' ? t.ascend : (result === null ? t.verify : t.nextStep)}

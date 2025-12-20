@@ -65,7 +65,7 @@ const Dashboard: React.FC<Props> = ({ state, onStartLesson, onLevelChange, onUnl
   const panelBorder = isDark ? 'border-white/5' : 'border-[#C2B280]/30';
 
   return (
-    <div className={`min-h-screen ${bgColor} ${textColor} pb-36 transition-colors ${isRTL ? 'rtl-layout' : 'ltr-layout'}`}>
+    <div className={`min-h-screen ${bgColor} ${textColor} pb-40 transition-colors ${isRTL ? 'rtl-layout' : 'ltr-layout'}`}>
       <header className={`sticky top-0 z-50 ${bgColor}/95 backdrop-blur-md p-6 border-b-2 ${panelBorder} flex flex-col gap-5 max-w-xl mx-auto shadow-md`}>
         <div className="flex justify-between items-center w-full">
           <div className="flex items-center gap-3">
@@ -77,7 +77,7 @@ const Dashboard: React.FC<Props> = ({ state, onStartLesson, onLevelChange, onUnl
           <div className="flex items-center gap-3">
             <button 
               onClick={() => onToggleTheme(isDark ? 'light' : 'dark')}
-              className={`w-12 h-12 rounded-2xl flex items-center justify-center border-b-4 ${panelColor} ${panelBorder} active:translate-y-0.5 active:border-b-0 shadow-sm`}
+              className={`w-12 h-12 rounded-2xl flex items-center justify-center border-b-4 ${panelColor} ${panelBorder} clay-tablet shadow-sm`}
             >
               {isDark ? '☀️' : '🌙'}
             </button>
@@ -92,7 +92,7 @@ const Dashboard: React.FC<Props> = ({ state, onStartLesson, onLevelChange, onUnl
         <div className="w-full">
           <button 
             onClick={onUnlockAll}
-            className={`w-full py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest border-b-4 bg-[#C2B280] border-[#A99C70] text-black active:translate-y-0.5 active:border-b-0 shadow-lg`}
+            className={`clay-tablet w-full py-5 rounded-2xl text-[10px] font-black uppercase tracking-widest bg-[#C2B280] border-[#A99C70] text-black shadow-lg`}
           >
             {t.unlock}
           </button>
@@ -114,7 +114,7 @@ const Dashboard: React.FC<Props> = ({ state, onStartLesson, onLevelChange, onUnl
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-20 relative py-10">
+        <div className="flex flex-col items-center gap-24 relative py-10">
           <div className={`absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1.5 ${isDark ? 'bg-white/5' : 'bg-[#A65E44]/5'} -z-10`}></div>
           
           {filteredLessons.map((lesson, idx) => {
@@ -146,11 +146,11 @@ const Dashboard: React.FC<Props> = ({ state, onStartLesson, onLevelChange, onUnl
                   )}
                 </button>
                 
-                <div className={`absolute top-32 w-56 text-center transition-opacity duration-300 ${isLocked ? 'opacity-30' : 'opacity-100'}`}>
+                <div className={`absolute top-32 w-64 text-center transition-opacity duration-300 ${isLocked ? 'opacity-30' : 'opacity-100'}`}>
                    <div className="text-[10px] font-black text-[#A65E44] uppercase tracking-widest mb-1">
                      {t.stage} {lesson.lesson_id}
                    </div>
-                   <div className="text-xs font-black uppercase leading-tight line-clamp-2 italic tracking-wide">
+                   <div className="text-xs font-black uppercase leading-tight line-clamp-2 italic tracking-wide px-2">
                      {native === 'english' ? lesson.title_en : native === 'arabic' ? lesson.title_ar : lesson.title_sorani}
                    </div>
                 </div>
@@ -160,14 +160,14 @@ const Dashboard: React.FC<Props> = ({ state, onStartLesson, onLevelChange, onUnl
         </div>
       </main>
 
-      <nav className={`fixed bottom-0 left-0 right-0 ${panelColor} border-t-2 ${panelBorder} p-7 flex justify-around max-w-xl mx-auto z-40 rounded-t-[40px] shadow-[0_-10px_40px_rgba(0,0,0,0.2)]`}>
+      <nav className={`fixed bottom-0 left-0 right-0 ${panelColor} border-t-2 ${panelBorder} p-6 pb-10 flex justify-around max-w-xl mx-auto z-40 rounded-t-[40px] shadow-[0_-10px_40px_rgba(0,0,0,0.2)]`}>
         {(['Beginner', 'Intermediate', 'Advanced'] as Level[]).map(l => (
           <button 
             key={l}
             onClick={() => onLevelChange(l)}
-            className={`clay-tablet px-6 py-4 rounded-t-[28px] rounded-b-xl text-[10px] font-black tracking-widest transition-all flex flex-col items-center gap-1 ${
+            className={`clay-tablet px-5 py-4 rounded-t-[28px] rounded-b-xl text-[10px] font-black tracking-widest transition-all flex flex-col items-center gap-1 ${
               state.currentLevel === l 
-                ? 'bg-[#A65E44] border-[#8D503A] text-white -translate-y-3 shadow-lg' 
+                ? 'bg-[#A65E44] border-[#8D503A] text-white -translate-y-4 shadow-lg scale-110' 
                 : `bg-transparent border-transparent ${isDark ? 'text-gray-600' : 'text-gray-400'}`
             }`}
           >
