@@ -52,11 +52,12 @@ const LanguageSelector: React.FC<Props> = ({ onSelect }) => {
     <div className={`flex flex-col items-center justify-center min-h-screen p-6 bg-[#121212] transition-colors relative overflow-hidden ${isRTL ? 'rtl-layout' : 'ltr-layout'}`}>
       <div className="w-full max-w-sm space-y-10 z-10">
         <div className="text-center flex flex-col items-center">
-          <div className="w-14 h-18 bg-[#A65E44] rounded-t-full border-4 border-[#C2B280] mb-5 flex items-center justify-end px-3 shadow-2xl relative">
-             <div className="w-2 h-2 bg-[#C2B280] rounded-full"></div>
+          {/* Enlarged Arch Logo */}
+          <div className="w-24 h-32 bg-[#A65E44] rounded-t-full border-[6px] border-[#C2B280] mb-8 flex items-center justify-end px-5 shadow-2xl relative">
+             <div className="w-3 h-3 bg-[#C2B280] rounded-full shadow-inner"></div>
           </div>
-          <h1 className="text-4xl font-black text-[#F5F5F5] uppercase tracking-wide">{t.title}</h1>
-          <p className="text-[#C2B280] font-bold mt-1 text-xs tracking-widest uppercase">{t.subtitle}</p>
+          <h1 className="text-5xl font-black text-[#F5F5F5] uppercase tracking-wide">{t.title}</h1>
+          <p className="text-[#C2B280] font-bold mt-2 text-sm tracking-widest uppercase opacity-80">{t.subtitle}</p>
         </div>
 
         <div className="space-y-6">
@@ -108,7 +109,7 @@ const LanguageSelector: React.FC<Props> = ({ onSelect }) => {
         <button
           onClick={() => isPathValid && onSelect(native, target)}
           disabled={!isPathValid}
-          className={`clay-tablet w-full py-5 rounded-2xl text-lg font-black uppercase tracking-widest shadow-xl transition-all ${
+          className={`clay-tablet w-full py-6 rounded-2xl text-lg font-black uppercase tracking-widest shadow-xl transition-all ${
             isPathValid 
               ? 'bg-[#A65E44] border-[#8D503A] text-white' 
               : 'bg-gray-800 border-gray-900 text-gray-600 grayscale opacity-50'

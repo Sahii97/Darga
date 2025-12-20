@@ -4,11 +4,48 @@ import { Lesson } from './types';
 const generateLessons = (): Lesson[] => {
   const data: Lesson[] = [];
 
-  // BEGINNER LESSONS (1-10)
+  // BEGINNER LESSONS
   const beginnerLessons: Lesson[] = [
     {
       level_id: 'Beginner',
       lesson_id: 1,
+      title_en: 'Alphabet Sounds',
+      title_ar: 'نطق الحروف الكردية',
+      title_sorani: 'دەنگەکان و پیتەکان',
+      grammar_tip_en: 'Kurdish is phonetic: you write exactly what you hear. Most letters are like Arabic, but these 5 are special.',
+      grammar_tip_ar: 'اللغة الكردية لغة صوتية: تكتب تماماً كما تنطق. معظم الحروف تشبه العربية، لكن هذه الـ ٥ أحرف هي المفتاح.',
+      grammar_tip_sorani: 'بۆ فێربوونی دەنگەکان، پێویستە بزانیت کە کوردی وەک دەبیسترێت دەنووسرێت.',
+      content: [
+        { 
+          word_sorani: 'پ', word_english: 'P (as in Pen)', word_arabic: 'حرف (P) - مثل Pen',
+          example_sentence_sorani: 'پێنچ (Pench)', example_sentence_translation_en: 'Five', example_sentence_translation_ar: 'رقم خمسة',
+          word_grammar_tip_en: 'Pronounced like P in English.', word_grammar_tip_ar: 'ينطق مثل حرف P بالإنجليزية، غير موجود بالعربية.', word_grammar_tip_sorani: 'دەنگی (پ).'
+        },
+        { 
+          word_sorani: 'چ', word_english: 'CH (as in Chair)', word_arabic: 'حرف (CH) - مثل Chair',
+          example_sentence_sorani: 'چاو (Chaw)', example_sentence_translation_en: 'Eye', example_sentence_translation_ar: 'عين',
+          word_grammar_tip_en: 'Pronounced like CH in English.', word_grammar_tip_ar: 'ينطق "تش" كما في كلمة "تشاي" أو Chair.', word_grammar_tip_sorani: 'دەنگی (چ).'
+        },
+        { 
+          word_sorani: 'ژ', word_english: 'ZH (as in Vision)', word_arabic: 'حرف (ZH) - مثل Vision',
+          example_sentence_sorani: 'ژن (Zhin)', example_sentence_translation_en: 'Woman / Wife', example_sentence_translation_ar: 'امرأة / زوجة',
+          word_grammar_tip_en: 'Pronounced like J in French "Je".', word_grammar_tip_ar: 'ينطق مثل الجيم القاهرية المعطشة أو الـ J بالفرنسية.', word_grammar_tip_sorani: 'دەنگی (ژ).'
+        },
+        { 
+          word_sorani: 'ڤ', word_english: 'V (as in Video)', word_arabic: 'حرف (V) - مثل Video',
+          example_sentence_sorani: 'ڤیدیۆ (Video)', example_sentence_translation_en: 'Video', example_sentence_translation_ar: 'فيديو',
+          word_grammar_tip_en: 'Standard V sound.', word_grammar_tip_ar: 'ينطق فاءً مثلثة (V) كما في اللغات الأجنبية.', word_grammar_tip_sorani: 'دەنگی (ڤ).'
+        },
+        { 
+          word_sorani: 'گ', word_english: 'G (as in Go)', word_arabic: 'حرف (G) - مثل Go',
+          example_sentence_sorani: 'گەورە (Gewre)', example_sentence_translation_en: 'Big / Great', example_sentence_translation_ar: 'كبير / عظيم',
+          word_grammar_tip_en: 'Hard G sound.', word_grammar_tip_ar: 'ينطق مثل الجيم في اللهجة المصرية (G).', word_grammar_tip_sorani: 'دەنگی (گ).'
+        }
+      ]
+    },
+    {
+      level_id: 'Beginner',
+      lesson_id: 2,
       title_en: 'Greetings',
       title_ar: 'التحيات',
       title_sorani: 'سڵاوکردن',
@@ -35,7 +72,7 @@ const generateLessons = (): Lesson[] => {
     },
     {
       level_id: 'Beginner',
-      lesson_id: 2,
+      lesson_id: 3,
       title_en: 'Numbers 1-5',
       title_ar: 'الأرقام ١-٥',
       title_sorani: 'ژمارەکان ١-٥',
@@ -47,10 +84,17 @@ const generateLessons = (): Lesson[] => {
         { word_sorani: 'دوو', word_english: 'Two', word_arabic: 'اثنان', example_sentence_sorani: 'دوو منداڵ یاری دەکەن.', example_sentence_translation_ar: 'طفلان يلعبان.', example_sentence_translation_en: 'Two children are playing.', word_grammar_tip_en: 'Number 2.', word_grammar_tip_ar: 'فائدة: الرقم اثنان يشبه اللغات الهندوأوروبية.', word_grammar_tip_sorani: 'ژمارە دووە.' },
         { word_sorani: 'سێ', word_english: 'Three', word_arabic: 'ثلاثة', example_sentence_sorani: 'سێ سێو بخۆ.', example_sentence_translation_ar: 'كل ثلاث تفاحات.', example_sentence_translation_en: 'Eat three apples.', word_grammar_tip_en: 'Number 3.', word_grammar_tip_ar: 'فائدة: يستخدم الرقم قبل المعدود.', word_grammar_tip_sorani: 'ژمارە سێیە.' }
       ]
-    },
+    }
+  ];
+
+  // Rest of the data (Intermediate and Advanced) remain as they were, but adjust lesson_ids if needed.
+  // We keep the logic simple by just prepending our new array.
+  
+  // Fix: Explicitly type restOfBeginner as Lesson[] to ensure level_id uses the Level literal type
+  const restOfBeginner: Lesson[] = [
     {
       level_id: 'Beginner',
-      lesson_id: 3,
+      lesson_id: 4,
       title_en: 'Family Roles',
       title_ar: 'أدوار العائلة',
       title_sorani: 'خێزان',
@@ -65,7 +109,7 @@ const generateLessons = (): Lesson[] => {
     },
     {
       level_id: 'Beginner',
-      lesson_id: 4,
+      lesson_id: 5,
       title_en: 'Color Basics',
       title_ar: 'أساسيات الألوان',
       title_sorani: 'ڕەنگەکان',
@@ -80,7 +124,7 @@ const generateLessons = (): Lesson[] => {
     },
     {
       level_id: 'Beginner',
-      lesson_id: 5,
+      lesson_id: 6,
       title_en: 'Common Actions',
       title_ar: 'أفعال شائعة',
       title_sorani: 'کردارەکان',
@@ -95,7 +139,7 @@ const generateLessons = (): Lesson[] => {
     },
     {
       level_id: 'Beginner',
-      lesson_id: 6,
+      lesson_id: 7,
       title_en: 'Food Essentials',
       title_ar: 'أساسيات الطعام',
       title_sorani: 'خواردن',
@@ -110,7 +154,7 @@ const generateLessons = (): Lesson[] => {
     },
     {
       level_id: 'Beginner',
-      lesson_id: 7,
+      lesson_id: 8,
       title_en: 'Weekly Cycle',
       title_ar: 'دورة الأسبوع',
       title_sorani: 'ڕۆژەکان',
@@ -125,7 +169,7 @@ const generateLessons = (): Lesson[] => {
     },
     {
       level_id: 'Beginner',
-      lesson_id: 8,
+      lesson_id: 9,
       title_en: 'Human Body',
       title_ar: 'جسم الإنسان',
       title_sorani: 'لەش',
@@ -140,7 +184,7 @@ const generateLessons = (): Lesson[] => {
     },
     {
       level_id: 'Beginner',
-      lesson_id: 9,
+      lesson_id: 10,
       title_en: 'The Sanctuary (Home)',
       title_ar: 'الملاذ (المنزل)',
       title_sorani: 'ماڵ',
@@ -151,21 +195,6 @@ const generateLessons = (): Lesson[] => {
         { word_sorani: 'ماڵ', word_english: 'Home', word_arabic: 'منزل', example_sentence_sorani: 'من لە ماڵەوەم.', example_sentence_translation_ar: 'أنا في المنزل.', example_sentence_translation_en: 'I am at home.', word_grammar_tip_en: 'Mal is home.', word_grammar_tip_ar: 'فائدة: ماڵ تعني البيت والوطن أحياناً.', word_grammar_tip_sorani: 'ماڵ جێی ئارامییە.' },
         { word_sorani: 'دەرگا', word_english: 'Door', word_arabic: 'باب', example_sentence_sorani: 'دەرگاکە دابخە.', example_sentence_translation_ar: 'أغلق الباب.', example_sentence_translation_en: 'Close the door.', word_grammar_tip_en: 'Darga is door.', word_grammar_tip_ar: 'فائدة: دەرگا هي كلمة الباب، تذكر إضافة "ەکە" للتعريف.', word_grammar_tip_sorani: 'دەرگا بۆ پاراستنە.' },
         { word_sorani: 'پەنجەرە', word_english: 'Window', word_arabic: 'نافذة', example_sentence_sorani: 'پەنجەرەکە بکەرەوە.', example_sentence_translation_ar: 'افتح النافذة.', example_sentence_translation_en: 'Open the window.', word_grammar_tip_en: 'Penjere is window.', word_grammar_tip_ar: 'فائدة: پەنجەرە كلمة مستعارة شائعة.', word_grammar_tip_sorani: 'پەنجەرە بۆ ڕووناکییە.' }
-      ]
-    },
-    {
-      level_id: 'Beginner',
-      lesson_id: 10,
-      title_en: 'Asking Questions',
-      title_ar: 'طرح الأسئلة',
-      title_sorani: 'پرسیارکردن',
-      grammar_tip_en: 'Interrogative words.',
-      grammar_tip_ar: 'أدوات الاستفهام في الكردية سهلة الاستخدام.',
-      grammar_tip_sorani: 'بۆ پرسیار جێناوی پرسیاری بەکاربێنە.',
-      content: [
-        { word_sorani: 'کێ', word_english: 'Who', word_arabic: 'من', example_sentence_sorani: 'تۆ کێیت؟', example_sentence_translation_ar: 'من أنت؟', example_sentence_translation_en: 'Who are you?', word_grammar_tip_en: 'Kê for people.', word_grammar_tip_ar: 'فائدة: کێ تستخدم للسؤال عن العاقل.', word_grammar_tip_sorani: 'بۆ کەسە.' },
-        { word_sorani: 'چی', word_english: 'What', word_arabic: 'ماذا', example_sentence_sorani: 'ئەوە چییە؟', example_sentence_translation_ar: 'ماذا يكون ذلك؟', example_sentence_translation_en: 'What is that?', word_grammar_tip_en: 'Chî for things.', word_grammar_tip_ar: 'فائدة: چی تستخدم للسؤال عن غير العاقل.', word_grammar_tip_sorani: 'بۆ شتە.' },
-        { word_sorani: 'لەکوێ', word_english: 'Where', word_arabic: 'أين', example_sentence_sorani: 'ماڵت لەکوێیە؟', example_sentence_translation_ar: 'أين منزلك؟', example_sentence_translation_en: 'Where is your home?', word_grammar_tip_en: 'Lekwê for location.', word_grammar_tip_ar: 'فائدة: لەکوێ للسؤال عن المكان.', word_grammar_tip_sorani: 'بۆ شوێنە.' }
       ]
     }
   ];
@@ -184,7 +213,7 @@ const generateLessons = (): Lesson[] => {
       content: [
         { word_sorani: 'قوتابخانە', word_english: 'School', word_arabic: 'مدرسة', example_sentence_sorani: 'قوتابخانە گەورەیە.', example_sentence_translation_ar: 'المدرسة كبيرة.', example_sentence_translation_en: 'The school is big.', word_grammar_tip_en: 'Compound word.', word_grammar_tip_ar: 'فائدة: قوتابخانە تتكون من قوتابی (طالب) و خانە (بيت).', word_grammar_tip_sorani: 'جێی فێربوونە.' },
         { word_sorani: 'مامۆستا', word_english: 'Teacher', word_arabic: 'معلم', example_sentence_sorani: 'مامۆستا وانە دەڵێتەوە.', example_sentence_translation_ar: 'المعلم يلقي الدرس.', example_sentence_translation_en: 'The teacher gives a lesson.', word_grammar_tip_en: 'Gender neutral.', word_grammar_tip_ar: 'فائدة: مامۆستا تطلق على المعلم والمعلمة.', word_grammar_tip_sorani: 'ڕێزی بگرە.' },
-        { word_sorani: 'تاقیکردنەوە', word_english: 'Exam', word_arabic: 'امتحان', example_sentence_sorani: 'ئەمڕۆ تاقیکردنەوەم هەیە.', example_sentence_translation_ar: 'عندي امتحان اليوم.', example_sentence_translation_en: 'I have an exam today.', word_grammar_tip_en: 'Common in Sorani.', word_grammar_tip_ar: 'فائدة: تاقیکردنەوە هي المرادف الكردي الأصيل لامتحان.', word_grammar_tip_sorani: 'هەوڵ بدە بۆی.' }
+        { word_sorani: 'تاقیکردنەوە', word_english: 'Exam', word_arabic: 'امتحان', example_sentence_sorani: 'ئەمڕۆ تاقیکردنەوەم هەیە.', example_sentence_translation_ar: 'عندنا امتحان اليوم.', example_sentence_translation_en: 'I have an exam today.', word_grammar_tip_en: 'Common in Sorani.', word_grammar_tip_ar: 'فائدة: تاقیکردنەوە هي المرادف الكردي الأصيل لامتحان.', word_grammar_tip_sorani: 'هەوڵ بدە بۆی.' }
       ]
     },
     {
@@ -412,7 +441,7 @@ const generateLessons = (): Lesson[] => {
       grammar_tip_sorani: 'ڕابردووە.',
       content: [
         { word_sorani: 'مێژوو', word_english: 'History', word_arabic: 'تاريخ', example_sentence_sorani: 'مێژووی دوور.', example_sentence_translation_ar: 'تاريخ بعيد.', example_sentence_translation_en: 'Ancient history.', word_grammar_tip_en: 'Chronology.', word_grammar_tip_ar: 'فائدة: مێژوو تعني التاريخ الموثق.', word_grammar_tip_sorani: 'زانیارییە.' },
-        { word_sorani: 'قەڵا', word_english: 'Citadel', word_arabic: 'قلعة', example_sentence_sorani: 'قەڵای هەولێر.', example_sentence_translation_ar: 'قلعة أربيل.', example_sentence_translation_en: 'Erbil Citadel.', word_grammar_tip_en: 'Fortress.', word_grammar_tip_ar: 'فائدة: قەڵا هي القلعة الحصينة.', word_grammar_tip_sorani: 'بۆ پاراستنە.' },
+        { word_sorani: 'قەڵا', word_english: 'Citadel', word_arabic: 'قلعة', example_sentence_sorani: 'قەڵای هەولێر.', example_sentence_translation_ar: 'قلعة أربيل.', example_sentence_translation_en: 'Erbil Citadel.', word_grammar_tip_en: 'Fortress.', word_grammar_tip_ar: 'فائدة: قەڵا هي القلة الحصينة.', word_grammar_tip_sorani: 'بۆ پاراستنە.' },
         { word_sorani: 'کۆن', word_english: 'Ancient', word_arabic: 'قديم', example_sentence_sorani: 'کتێبێکی کۆن.', example_sentence_translation_ar: 'كتاب قديم.', example_sentence_translation_en: 'An old book.', word_grammar_tip_en: 'Old state.', word_grammar_tip_ar: 'فائدة: کۆن صفة للأشياء القديمة.', word_grammar_tip_sorani: 'تازە نییە.' }
       ]
     },
@@ -478,7 +507,7 @@ const generateLessons = (): Lesson[] => {
     }
   ];
 
-  data.push(...beginnerLessons, ...intermediateLessons, ...advancedLessons);
+  data.push(...beginnerLessons, ...restOfBeginner, ...intermediateLessons, ...advancedLessons);
 
   return data;
 };

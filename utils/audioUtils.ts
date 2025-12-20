@@ -28,16 +28,29 @@ export async function decodeAudioData(
   return buffer;
 }
 
+let activeAudioContext: AudioContext | null = null;
+
 export async function playRawAudio(base64Data: string) {
   try {
-    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
-    const bytes = decodeBase64(base64Data);
-    const buffer = await decodeAudioData(bytes, audioContext, 24000, 1);
+    if (!activeAudioContext) {
+      activeAudioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
+    }
     
-    const source = audioContext.createBufferSource();
+    if (activeAudioContext.state === 'suspended') {
+      await activeAudioContext.resume();
+    }
+
+    const bytes = decodeBase64(base64Data);
+    const buffer = await decodeAudioData(bytes, activeAudioContext, 24000, 1);
+    
+    const source = activeAudioContext.createBufferSource();
     source.buffer = buffer;
-    source.connect(audioContext.destination);
-    source.start();
+    source.connect(activeAudioContext.destination);
+    source.start(0);
+    
+    return new Promise((resolve) => {
+      source.onended = resolve;
+    });
   } catch (error) {
     console.error("Audio playback failed:", error);
   }
