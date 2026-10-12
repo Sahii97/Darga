@@ -36,6 +36,11 @@ export async function decodeAudioData(
 
 let activeAudioContext: AudioContext | null = null;
 
+export async function prepareAudio() {
+  if (!activeAudioContext) activeAudioContext = new AudioContext({ sampleRate: 24000 });
+  if (activeAudioContext.state === "suspended") await activeAudioContext.resume();
+}
+
 export async function playRawAudio(base64Data: string) {
   try {
     if (!activeAudioContext) {
@@ -59,6 +64,6 @@ export async function playRawAudio(base64Data: string) {
       source.onended = resolve;
     });
   } catch (error) {
-    console.error("Audio playback failed:", error);
+    throw error;
   }
 }

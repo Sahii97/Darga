@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { AppState, Lesson, Language } from '../types';
+import { speakText } from '../utils/languageServices';
 
 interface Props {
   state: AppState;
@@ -10,6 +11,9 @@ interface Props {
 }
 
 const LessonSession: React.FC<Props> = ({ state, lesson, onComplete, onExit }) => {
+  const [audioBusy, setAudioBusy] = React.useState(false);
+  const [audioError, setAudioError] = React.useState('');
+  const listen = async () => { setAudioBusy(true); setAudioError(''); try { await speakText(getTarget(), state.targetLanguage); } catch(e) { setAudioError((e as Error).message); } finally { setAudioBusy(false); } };
   const [phase, setPhase] = React.useState<'teaching' | 'quiz'>('teaching');
   const [index, setIndex] = React.useState(0);
   const [selected, setSelected] = React.useState<string | null>(null);
@@ -141,7 +145,7 @@ const LessonSession: React.FC<Props> = ({ state, lesson, onComplete, onExit }) =
   const panelBorder = isDark ? 'border-[#2A2A2A]' : 'border-[#C2B280]/30';
 
   return (
-    <div className={`fixed inset-0 ${bgColor} ${textColor} z-50 flex flex-col transition-colors ${isRTL ? 'rtl-layout' : 'ltr-layout'}`} style={{ height: '100dvh' }}>
+    <div data-theme={state.theme} className={`lesson-session fixed inset-0 ${bgColor} ${textColor} z-50 flex flex-col transition-colors ${isRTL ? 'rtl-layout' : 'ltr-layout'}`} style={{ height: '100dvh' }}>
       <div className="p-3 max-w-xl mx-auto w-full flex items-center gap-3">
         <button onClick={onExit} className="text-gray-500 hover:text-[#A65E44] transition-colors p-2">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -166,6 +170,8 @@ const LessonSession: React.FC<Props> = ({ state, lesson, onComplete, onExit }) =
                 <div className="text-5xl md:text-6xl font-black text-[#F5F5F5] leading-none mb-2">{getTarget()}</div>
               </div>
 
+              <button className="listen-button" onClick={listen} disabled={audioBusy}>{audioBusy ? "Playing…" : "Listen"}</button>
+              {audioError && <p role="status" className="service-message">{audioError}</p>}
               <div className="text-base md:text-lg text-[#C2B280] font-bold uppercase italic opacity-60">
                 {getSource()}
               </div>
