@@ -7,13 +7,13 @@ interface Props {
 }
 
 const LanguageSelector: React.FC<Props> = ({ onSelect }) => {
-  const [native, setNative] = React.useState<Language>('arabic');
+  const [native, setNative] = React.useState<Language>('english');
   const [target, setTarget] = React.useState<Language>('sorani');
 
   const options: { id: Language; label: { english: string; arabic: string; sorani: string }; available: boolean }[] = [
     { id: 'arabic', label: { english: 'Arabic', arabic: 'العربية', sorani: 'عەرەبی' }, available: true },
     { id: 'sorani', label: { english: 'Kurdish', arabic: 'الكوردية', sorani: 'کوردی' }, available: true },
-    { id: 'english', label: { english: 'English', arabic: 'الإنجليزية', sorani: 'ئینگلیزی' }, available: false },
+    { id: 'english', label: { english: 'English', arabic: 'الإنجليزية', sorani: 'ئینگلیزی' }, available: true },
   ];
 
   const translations = {
@@ -46,15 +46,15 @@ const LanguageSelector: React.FC<Props> = ({ onSelect }) => {
   const t = translations[native];
   const isRTL = native === 'arabic' || native === 'sorani';
 
-  const isPathValid = native === 'arabic' && target === 'sorani';
+  const isPathValid = native !== 'sorani' && target === 'sorani';
 
   return (
     <div className={`flex flex-col items-center justify-center min-h-screen p-6 bg-[#121212] transition-colors relative overflow-hidden ${isRTL ? 'rtl-layout' : 'ltr-layout'}`}>
       <div className="w-full max-w-sm space-y-8 z-10">
         <div className="text-center flex flex-col items-center">
-          <div className="w-24 h-32 bg-[#A65E44] rounded-t-full border-[6px] border-[#C2B280] mb-6 flex items-center justify-end px-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative">
+          <div className="w-24 h-32 bg-[#A65E44] rounded-t-lg border-[6px] border-[#C2B280] mb-6 flex items-center justify-end px-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative">
              <div className="w-3 h-3 bg-[#C2B280] rounded-full shadow-inner"></div>
-             <div className="absolute inset-0 border-t-2 border-x-2 border-white/5 rounded-t-full"></div>
+             <div className="absolute inset-0 border-t-2 border-x-2 border-white/5 rounded-t-lg"></div>
           </div>
           <h1 className="text-4xl font-black text-[#F5F5F5] uppercase tracking-wide">{t.title}</h1>
           <p className="text-[#C2B280] font-bold mt-1 text-[10px] tracking-widest uppercase opacity-80">{t.subtitle}</p>
@@ -67,7 +67,7 @@ const LanguageSelector: React.FC<Props> = ({ onSelect }) => {
               {options.map((opt) => (
                 <button
                   key={opt.id}
-                  disabled={!opt.available || opt.id !== 'arabic'}
+                  disabled={opt.id === 'sorani'}
                   onClick={() => setNative(opt.id)}
                   className={`clay-tablet py-4 px-1 rounded-xl font-bold transition-all text-[11px] flex items-center justify-center text-center relative ${
                     native === opt.id ? 'bg-[#A65E44] border-[#8D503A] text-white shadow-lg' : 
@@ -75,7 +75,7 @@ const LanguageSelector: React.FC<Props> = ({ onSelect }) => {
                   }`}
                 >
                   {opt.label[native]}
-                  {opt.id !== 'arabic' && <span className="absolute -bottom-1 text-[7px] text-[#C2B280] font-black">{t.soon}</span>}
+                  {opt.id === 'sorani' && <span className="absolute -bottom-1 text-[7px] text-[#C2B280] font-black">{t.soon}</span>}
                 </button>
               ))}
             </div>
@@ -95,7 +95,7 @@ const LanguageSelector: React.FC<Props> = ({ onSelect }) => {
                   }`}
                 >
                   {opt.label[native]}
-                  {opt.id !== 'sorani' && opt.id !== 'arabic' && <span className="absolute -bottom-1 text-[7px] text-[#A65E44] font-black">{t.soon}</span>}
+                  {opt.id !== 'sorani' && <span className="absolute -bottom-1 text-[7px] text-[#A65E44] font-black">{t.soon}</span>}
                 </button>
               ))}
             </div>

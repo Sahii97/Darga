@@ -7,8 +7,10 @@ import Dashboard from './components/Dashboard';
 import LessonSession from './components/LessonSession';
 
 const App: React.FC = () => {
-  const [state, setState] = React.useState<AppState | null>(null);
+  const [state, setState] = React.useState<AppState | null>(() => { try { return JSON.parse(localStorage.getItem("darga-state") || "null"); } catch { return null; } });
   const [activeLessonIndex, setActiveLessonIndex] = React.useState<number | null>(null);
+
+  React.useEffect(() => { localStorage.setItem("darga-state", JSON.stringify(state)); }, [state]);
 
   const handleLangSelect = (native: Language, target: Language) => {
     setState({
@@ -51,7 +53,7 @@ const App: React.FC = () => {
   const handleLessonComplete = () => {
     if (state && activeLessonIndex !== null) {
       const lesson = curriculum[activeLessonIndex];
-      const updatedCompleted = { ...state.completedLessons };
+      const updatedCompleted = { ...state.completedLessons, [lesson.level_id]: [...state.completedLessons[lesson.level_id]] };
       if (!updatedCompleted[lesson.level_id].includes(lesson.lesson_id)) {
         updatedCompleted[lesson.level_id].push(lesson.lesson_id);
       }
